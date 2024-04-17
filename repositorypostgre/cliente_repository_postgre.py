@@ -1,3 +1,4 @@
+# Instale psycogp2 com 'pip install psycopg2-binary' para usar esse arquivo.
 import psycopg2
 
 class ClienteRepositoryPostgre:
