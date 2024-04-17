@@ -1,0 +1,4 @@
+venv
+infra
+*.md
+*/__pycache__/
