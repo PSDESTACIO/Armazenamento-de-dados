@@ -13,7 +13,7 @@ try:
         print(cliente)
     print("gravamos e listamos do MongoDb")
 
-except Exception in error:
+except Exception as error:
     print(f"{error}")
 
 
