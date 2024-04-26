@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 
 app = Flask(__name__)
 
@@ -11,12 +11,20 @@ def submit():
     nome = request.form['nome']
     email = request.form['email']
     
-    # Here, you can process the name and email as needed
-    # For now, let's just print them
+    # Essa parte do código que podemos enviar o dado para o PostregreSQL
     print("Nome:", nome)
     print("Email:", email)
-    
-    return "Form submitted successfully!"
+    print("Dados recebidos com sucesso.") 
 
+    return redirect(url_for('dados_enviados'))
+
+# TODO: Implementar acesso a outro sites pelo Flask
+
+# Redireciona usuario para pagina principal apos inserir dados
+@app.route('/index.html')
+def dados_enviados():
+    return render_template('index.html')
+
+# Abre o aplicativo na porta 5500 e o roda.
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port = 5500)
