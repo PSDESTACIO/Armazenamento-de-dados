@@ -25,6 +25,18 @@ def submit():
 def dados_enviados():
     return render_template('index.html')
 
+@app.route('/Contato.html')
+def rota_Contato():
+    return render_template('Contato.html')
+
+@app.route('/QuemSomos.html')
+def rota_QuemSomos():
+    return render_template('QuemSomos.html')
+
+@app.route('/postgreteste.html')
+def rota_postgreteste():
+    return render_template('postgreteste.html')
+
 # Abre o aplicativo na porta 5500 e o roda.
 if __name__ == '__main__':
     app.run(debug=True, port = 5500)
