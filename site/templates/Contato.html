@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+            <head>
+                <meta charset="UTF-8">
+                <title>Página da Ana</title>
+                <link rel = "icon" href = "static/imagem/logoestacio.png">
+
+                <style>
+                    h1#subtitulo {
+                        color: blue;
+                        text-align: center;
+                    }
+                    footer {
+                        text-align: center;
+                    }
+                </style>
+
+
+                <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+                    <script src="{{ url_for('static', filename='script/JS.ts') }}"></script>
+
+                     <h1 id="subtitulo">Projeto de Extensão - Big Data em Python<br> da <br> Equipe PSD </h1>
+
+               <nav>
+
+                     <h2> Menu  Principal</h2>
+                   <ul>
+
+                          <li><a href="index.html"> Início</a></li>
+                          <li><a href="QuemSomos.html"> Quem Somos</a></li>
+                          <li><a href="Contato.html"> Contato</a></li>
+                          <li><a href="postgreteste.html"> postgreteste</a></li>
+                   </ul>
+               </nav>
+
+            </head>
+
+            <figure class="centered-figure">
+                <img src="{{ url_for('static', filename='imagem/logoestaciofull.png') }}"  alt="Imagem grande do símbolo da Estácio.">
+            </figure>
+
+           <body>
+
+           <h2>Contato</h2>
+
+           <form action="/action_page.php">
+               <label for="fname">Nome*:</label>
+               <input type="text" id="fname" name="fname"  value="Equipe PSD" ><br>
+               <label for="lname">E.mail*:</label>
+               <input type="text" id="lname" name="lname" value="psdalunos.estacio@gmail.com"><br>
+               <label for="fname">Telefone:</label>
+               <input type="text" id="fname" name="fname" value="9999-99999"><br>
+               <label for="fname">Sexo:</label>
+               <input type="radio" name="sexo" value="Masculino" >Masculino/>
+               <input type="radio"name="sexo" value="feminino">Feminino/><br>
+               <label for="fname">Endereço:</label>
+               <input type="text" id="fname" name="fname" value="Nova Iguaçu"><br>
+               <label for="fname">Mensagem:</label><br>
+               <textarea name="mensagem" rows="6" cols="50">comente aqui:</textarea>
+               <input type="submit" value="Enviar">
+
+           </form>
+
+
+           </body>
+
+           <footer class="footer">
+               <strong>
+                <p>Site Desenvolvido pela Equipe PSD, na disciplina:<br>
+                   <a href="https://estudante.estacio.br/disciplinas/estacio_5652694/temas/1">
+                       Tópicos de Big Data em Python</a></p>
+               </strong>
+           </footer>
+</html>
+

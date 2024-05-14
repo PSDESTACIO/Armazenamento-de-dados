@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página da Ana</title>
+    <link rel = "icon" href = "static/imagem/logoestacio.png">
+
+    
+    <style>
+        h1#subtitulo 
+        {
+            color: blue;
+            text-align: center;
+        }
+        footer 
+        {
+            text-align: center;
+        }
+    </style>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    <h1 id="subtitulo">Projeto de Extensão - Big Data em Python<br> da <br> Equipe PSD </h1>
+    <nav>
+      <h2> Menu  Principal</h2>
+    <ul>
+
+           <li><a href="index.html"> Início</a></li>
+           <li><a href="QuemSomos.html"> Quem Somos</a></li>
+           <li><a href="Contato.html"> Contato</a></li>
+           <li><a href="postgreteste.html"> postgreteste</a></li>
+    </ul>
+    </nav>
+</head>
+
+<body>
+    <h1>Teste de PostgreSQL</h1>
+    <h4>Insira nome e email. Estes dados serão adicionados ao banco de dados PostgreSQL.</h4>
+    <form action="/submit" method="POST">
+        <label for="name">Nome:</label><br>
+        <input type="text" id="name" name="nome"><br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br><br>
+        <input type="submit" value="Submit">
+    </form>    
+</body>
+</html>
+
+<footer class="footer">
+    <strong>
+     <p>Site Desenvolvido pela Equipe PSD, na disciplina:<br>
+        <a href="https://estudante.estacio.br/disciplinas/estacio_5652694/temas/1">
+            Tópicos de Big Data em Python</a></p>
+    </strong>
+</footer>

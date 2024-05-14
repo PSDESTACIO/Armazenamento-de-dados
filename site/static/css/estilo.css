@@ -1,0 +1,18 @@
+.centered-figure {
+    text-align: center;
+}
+
+.footer {
+    background-color: rgb(16, 163, 196);
+    color: white;
+    text-align: center;
+    padding: 10px; /* Ajuste o padding como necessario */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.content {
+    margin-bottom: 100px; /* Ajuste a margim como necessario */
+}
