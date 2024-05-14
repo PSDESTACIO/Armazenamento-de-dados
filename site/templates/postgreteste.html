@@ -19,7 +19,7 @@
         }
     </style>
 
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
     <h1 id="subtitulo">Projeto de Extensão - Big Data em Python<br> da <br> Equipe PSD </h1>
     <nav>
       <h2> Menu  Principal</h2>
@@ -45,3 +45,11 @@
     </form>    
 </body>
 </html>
+
+<footer class="footer">
+    <strong>
+     <p>Site Desenvolvido pela Equipe PSD, na disciplina:<br>
+        <a href="https://estudante.estacio.br/disciplinas/estacio_5652694/temas/1">
+            Tópicos de Big Data em Python</a></p>
+    </strong>
+</footer>

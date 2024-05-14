@@ -16,8 +16,8 @@
                 </style>
 
 
-                <link rel="stylesheet" href="estilo.css">
-                   <script src="JS"></script>
+                <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+                    <script src="{{ url_for('static', filename='script/JS.ts') }}"></script>
 
                      <h1 id="subtitulo">Projeto de Extensão - Big Data em Python<br> da <br> Equipe PSD </h1>
 
@@ -35,8 +35,8 @@
 
             </head>
 
-            <figure align="center">
-                <img src="static/imagem/logoestaciofull.png"  alt="Imagem grande do símbolo da Estácio.">
+            <figure class="centered-figure">
+                <img src="{{ url_for('static', filename='imagem/logoestaciofull.png') }}"  alt="Imagem grande do símbolo da Estácio.">
             </figure>
 
            <body>
@@ -64,13 +64,12 @@
 
            </body>
 
-           <footer>
+           <footer class="footer">
                <strong>
-                <p>Site Desenvolvido por Ana Rodrigues, na disciplina de :<br>
+                <p>Site Desenvolvido pela Equipe PSD, na disciplina:<br>
                    <a href="https://estudante.estacio.br/disciplinas/estacio_5652694/temas/1">
                        Tópicos de Big Data em Python</a></p>
                </strong>
-
            </footer>
 </html>
 

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-           <head>
-               <meta charset="UTF-8">
-               <title>Página da Ana</title>
-               <link rel = "icon" href = "static/imagem/logoestacio.png">
+            <head>
+                <meta charset="UTF-8">
+                <title>Página da Ana</title>
+                <link rel = "icon" href = "static/imagem/logoestacio.png">
 
-               <style>
+                <style>
                    h1#subtitulo{
                        color: blue;
                        text-align: center;
@@ -19,38 +19,39 @@
                    form {
                        text-align: center;
                    }
-               </style>
+                </style>
 
 
-               <link rel="stylesheet" href="estilo.css">
-                  <script src="JS"></script>
+                <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+                        <script src="{{ url_for('static', filename='script/JS.ts') }}"></script>
 
-                    <h1 id="subtitulo">Projeto de Extensão - Big Data em Python<br> da <br> Equipe PSD </h1>
+                        <h1 id="subtitulo">Projeto de Extensão - Big Data em Python<br> da <br> Equipe PSD </h1>
 
-               <nav>
+                <nav>
 
-                   <h2> Menu  Principal</h2>
-                   <ul>
+                    <h2> Menu  Principal</h2>
+                    <ul>
 
                       <li><a href="index.html"> Início</a></li>
                       <li><a href="QuemSomos.html"> Quem Somos</a></li>
                       <li><a href="Contato.html"> Contato</a></li>
                       <li><a href="postgreteste.html"> postgreteste</a></li>
 
-                   </ul>
-               </nav>
+                    </ul>
+                </nav>
 
-           </head>
+            </head>
 
-               <figure align="center" >
-                   <img src="static/imagem/logoestaciofull.png"  alt="Imagem grande do símbolo da Estácio.">
-               </figure>
+                <figure class="centered-figure">
+                <img src="{{ url_for('static', filename='imagem/logoestaciofull.png') }}"  alt="Imagem grande do símbolo da Estácio.">
+                </figure>
 
-          <body>
+        <body class = "content">
 
-          <figure align="center">
-              <img src="static/imagem/equipePSD.jpg" height="540" width="960"  alt="Imagem grande da equipe PSD, responsável pelo desenvolvimento do projeto." />
-          </figure>
+        <figure class="centered-figure">
+            <img src="{{ url_for('static', filename='imagem/equipePSD.jpg') }}" height="540" width="960" alt="Imagem grande da equipe PSD, responsável pelo desenvolvimento do projeto.">
+        </figure>
+            
 
 
           <h2 id="quemsomos"><i>Desenvolvedores de Projeto de Extensâo<br>Equipe PSD(Pessoas Sob Demanda)</i>.</h2>
@@ -65,22 +66,21 @@
               <p> Professor:<input id="professor" value=" Edson Belém de S. Junior"></p>
 
          </form>
-
+         
           <h1> Sobre Equipe PSD :</h1>
           <h2>Equipe acadêmica, Grupo PSD (Pessoas Sob Demanda), alunos universitários da Universidade Estácio de Sá,
               com a orientação do professor Edson Belém de Souza Junior, docente da Universidade Estácio de Sá,
               da disciplina Tópicos de Big Data em Python, de Sistema de Informação. </h2>
 
-          </body>
+        </body>
 
+        <footer class="footer">
+            <strong>
+            <p>Site Desenvolvido pela Equipe PSD, na disciplina:<br>
+                <a href="https://estudante.estacio.br/disciplinas/estacio_5652694/temas/1">
+                    Tópicos de Big Data em Python </a></p>
+            </strong>
 
-          <footer>
-              <strong>
-              <p>Site Desenvolvido por Ana Rodrigues, na disciplina de :<br>
-                  <a href="https://estudante.estacio.br/disciplinas/estacio_5652694/temas/1">
-                      Tópicos de Big Data em Python </a></p>
-              </strong>
-
-          </footer>
+        </footer>
 
 </html>

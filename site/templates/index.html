@@ -15,11 +15,11 @@
                }
 
            </style>
+            
+           <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+               <script src="{{ url_for('static', filename='script/JS.ts') }}"></script>
 
-           <link rel="stylesheet" href="estilo.css">
-               <script src="JS"></script>
-
-                   <h1 id="subtitulo"> Projeto Extensão - Big Data em Python <br> da <br> Equipe PSD </h1>
+                <h1 id="subtitulo"> Projeto Extensão - Big Data em Python <br> da <br> Equipe PSD </h1>
 
               <nav>
 
@@ -38,9 +38,8 @@
             
        <body>
 
-        <figure align="center">
-            <img src="static/imagem/logoestaciofull.png" alt="Imagem grande do símbolo da Estácio.">
-            <img src="{{ url_for('static', filename='imagem/logoestaciofull.png') }}" alt="Imagem">
+        <figure class="centered-figure">
+            <img src="{{ url_for('static', filename='imagem/logoestaciofull.png') }}" class="image" alt="Imagem">
         </figure>
 
         <p><h2><b><i>Tópico Big Data em Python.</i></b></h2></p>
@@ -52,12 +51,11 @@
             PostgreSQL e outros, que estão disponiveis no Citrix.</b>
         </body><br>
 
-        <br><footer>
-
-           <strong>
-        <p>Site Desenvolvido por Ana Rodrigues, na disciplina :<br>
-        <a href="https://estudante.estacio.br/disciplinas/estacio_5652694/temas/1">
-           Tópico Big Data em Python</a></p>
-           </strong>
+        <footer class="footer">
+        <strong>
+            <p>Site Desenvolvido pela Equipe PSD, na disciplina:<br>
+            <a href="https://estudante.estacio.br/disciplinas/estacio_5652694/temas/1">
+            Tópicos de Big Data em Python</a></p>
+        </strong>
        </footer>
 </html>
