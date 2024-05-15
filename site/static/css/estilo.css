@@ -7,7 +7,7 @@ body {
 }
 
 .footer {
-    background-image: linear-gradient(to right, rgb(16, 163, 196), rgb(0, 102, 204)); /* Gradiente entre duas cores*/
+    background-image: linear-gradient(to right, rgb(16, 163, 196), rgb(2, 73, 145)); /* Gradiente entre duas cores*/
     color: white;
     text-align: center;
     padding: 10px; /* Ajuste o padding como necessario */
@@ -27,4 +27,40 @@ body {
 
 .content {
     margin-bottom: 100px; /* Ajuste a margim como necessario */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+nav a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(16, 163, 196);
+    color: white;
+    text-decoration: none;
+    border: 1px solid rgb(16, 163, 196);
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Adiciona a sombra na transicao */
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2); /* Coloca uma sombra no botao */
+}
+
+nav a:hover {
+    background-color: rgb(2, 73, 145);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); /* Aumenta a sombra quando o mouse esta em cima do botao */
+}
+
+nav a:focus {
+    outline: none;
+}
+
+nav h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
 }

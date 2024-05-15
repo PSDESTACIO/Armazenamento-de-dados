@@ -7,11 +7,6 @@
     <link rel="icon" href="static/imagem/logoestacio.png">
 
     <style>
-        h1#subtitulo {
-            color: blue;
-            text-align: center;
-        }
-
         h2#quemsomos {
             text-align: center;
         }
@@ -25,21 +20,18 @@
         }
     </style>
 
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
     <script src="{{ url_for('static', filename='script/JS.ts') }}"></script>
-
-    <h1 id="subtitulo">Projeto de Extensão - Big Data em Python<br> da <br> Equipe PSD </h1>
 
     <nav>
 
         <h2> Menu Principal</h2>
         <ul>
 
-            <li><a href="index.html"> Início</a></li>
-            <li><a href="QuemSomos.html"> Quem Somos</a></li>
-            <li><a href="Contato.html"> Contato</a></li>
-            <li><a href="postgreteste.html"> postgreteste</a></li>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="QuemSomos.html">Quem Somos</a></li>
+            <li><a href="Contato.html">Contato</a></li>
+            <li><a href="postgreteste.html">PostgreSQL Demo</a></li>
 
         </ul>
     </nav>
@@ -47,8 +39,8 @@
 </head>
 
 <figure class="centered-figure">
-    <img src="{{ url_for('static', filename='imagem/logoestaciofull.png') }}"
-        alt="Imagem grande do símbolo da Estácio.">
+    <img src="{{ url_for('static', filename='imagem/logoestaciofull.png') }}" alt="Imagem" 
+    style="max-width: 20%; height: auto;">
 </figure>
 
 <body class="content">
@@ -60,6 +52,12 @@
 
     <h2 id="quemsomos"><i>Desenvolvedores de Projeto de Extensâo<br>Equipe PSD (Pessoas Sob Demanda)</i></h2>
 
+    <div style="text-align: center;">
+        <i>Somos alunos universitários da Universidade Estácio de Sá.<br>
+            Seguimos neste semestre e projeto com orientação do professor Edson Belém de Souza Junior, docente da Universidade Estácio de Sá,
+            da disciplina Tópicos de Big Data em Python</i>
+    </div>
+
     <form>
         <p> Nome:<input id="Nome" value="PSD."></p>
         <p> Ano:<input id="ano" value=" 2024"></p>
@@ -68,14 +66,7 @@
         <p> Curso:<input id="curso" value=" Sistemas de Informação "></p>
         <p> Disciplina:<input id="disciplina" value=" Tópico Big Data em Python"></p>
         <p> Professor:<input id="professor" value=" Edson Belém de S. Junior"></p>
-
     </form>
-
-    <h1>Sobre Equipe PSD :</h1>
-    <h2>Equipe acadêmica, Grupo PSD (Pessoas Sob Demanda), alunos universitários da Universidade Estácio de Sá,
-        com a orientação do professor Edson Belém de Souza Junior, docente da Universidade Estácio de Sá,
-        da disciplina Tópicos de Big Data em Python, de Sistema de Informação. </h2>
-
 </body>
 
 <footer class="footer">
