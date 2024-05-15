@@ -1,61 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-       <head>
-           <meta charset="UTF-8">
-           <title>Página da Ana</title>
-           <link rel = "icon" href = "static/imagem/logoestacio.png">
 
-           <style>
-               h1#subtitulo {
-                   color: blue;
-                   text-align: center;
-               }
-               footer {
-                   text-align: center;
-               }
+<head>
+    <meta charset="UTF-8">
+    <title>Página da Ana</title>
+    <link rel="icon" href="static/imagem/logoestacio.png">
 
-           </style>
-            
-           <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
-               <script src="{{ url_for('static', filename='script/JS.ts') }}"></script>
+    <style>
+        h1#subtitulo {
+            color: blue;
+            text-align: center;
+        }
 
-                <h1 id="subtitulo"> Projeto Extensão - Big Data em Python <br> da <br> Equipe PSD </h1>
+        footer {
+            text-align: center;
+        }
+    </style>
 
-              <nav>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    <script src="{{ url_for('static', filename='script/JS.ts') }}"></script>
 
-                 <h2> Menu  Principal</h2>
-                  <ul>
+    <h1 id="subtitulo"> Projeto Extensão - Big Data em Python <br> da <br> Equipe PSD </h1>
 
-                    <li><a href="index.html"> Início</a></li>
-                    <li><a href="QuemSomos.html"> Quem Somos</a></li>
-                    <li><a href="Contato.html"> Contato</a></li>
-                    <li><a href="postgreteste.html"> postgreteste</a></li>
-                  </ul>
+    <nav>
+        <h2> Menu Principal</h2>
+        <ul>
 
-              </nav>
+            <li><a href="index.html"> Início</a></li>
+            <li><a href="QuemSomos.html"> Quem Somos</a></li>
+            <li><a href="Contato.html"> Contato</a></li>
+            <li><a href="postgreteste.html"> postgreteste</a></li>
+        </ul>
+    </nav>
+</head>
 
-       </head>
-            
-       <body>
+<body>
 
-        <figure class="centered-figure">
-            <img src="{{ url_for('static', filename='imagem/logoestaciofull.png') }}" class="image" alt="Imagem">
-        </figure>
+    <figure class="centered-figure">
+        <img src="{{ url_for('static', filename='imagem/logoestaciofull.png') }}" class="image" alt="Imagem">
+    </figure>
 
-        <p><h2><b><i>Tópico Big Data em Python.</i></b></h2></p>
+    <p>
+    <h2><b><i>Tópico Big Data em Python.</i></b></h2>
+    </p>
 
-        <b> Este site está sendo desenvolvido como parte um projeto extensionista da disciplina,
-            Tópico Big Data Python, ministrada <br>pelo professor Edson Belém Souza Junior, na
-            Universidade Estácio Sá, no curso Sistema Informação, utilizando as tecnologias que <br> aprendemos
-            em outras disciplinas do curso sistemas informação que são IDE PHP Storm, Visual Studio Code,Hack MD,
-            PostgreSQL e outros, que estão disponiveis no Citrix.</b>
-        </body><br>
+    <b> Este site está sendo desenvolvido como parte um projeto extensionista da disciplina,
+        Tópico Big Data Python, ministrada <br>pelo professor Edson Belém Souza Junior, na
+        Universidade Estácio Sá, no curso Sistema Informação, utilizando as tecnologias que <br> aprendemos
+        em outras disciplinas do curso sistemas informação que são IDE PHP Storm, Visual Studio Code,Hack MD,
+        PostgreSQL e outros, que estão disponiveis no Citrix.</b>
+</body><br>
 
-        <footer class="footer">
-        <strong>
-            <p>Site Desenvolvido pela Equipe PSD, na disciplina:<br>
+<footer class="footer">
+    <strong>
+        <p>Site Desenvolvido pela Equipe PSD, na disciplina:<br>
             <a href="https://estudante.estacio.br/disciplinas/estacio_5652694/temas/1">
-            Tópicos de Big Data em Python</a></p>
-        </strong>
-       </footer>
+                Tópicos de Big Data em Python</a>
+        </p>
+    </strong>
+</footer>
 </html>
