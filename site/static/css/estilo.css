@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif; /* Fonte do site inteiro */
+    background-color: rgb(242, 253, 255); /* Cor do fundo do site */ 
 }
 
 .centered-figure {
@@ -61,6 +62,6 @@ nav a:focus {
 }
 
 nav h2 {
-    font-size: 18px;
+    font-size: 24px;
     margin-bottom: 10px;
 }

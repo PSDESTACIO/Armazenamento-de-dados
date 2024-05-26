@@ -1,4 +1,12 @@
+import sys
+import os
+
+# Adicione o diretório pai ao sys.path para resolver importações de módulos
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from flask import Flask, render_template, request, redirect, url_for
+from model.cliente import Cliente
+from repositorypostgre.cliente_repository_postgre import ClienteRepositoryPostgre
 
 app = Flask(__name__)
 
@@ -11,10 +19,17 @@ def submit():
     nome = request.form['nome']
     email = request.form['email']
     
-    # Essa parte do código que podemos enviar o dado para o PostgreSQL
-    print("Nome:", nome)
-    print("Email:", email)
-    print("Dados recebidos com sucesso.") 
+    # Create a new Cliente instance
+    cliente = Cliente(nome=nome, email=email)
+    
+    # Try to save the new cliente to the PostgreSQL database
+    try:
+        repository = ClienteRepositoryPostgre()
+        msg = repository.save(cliente)
+        print(f"Dados recebidos com sucesso: {msg}")
+    except Exception as error:
+        print(f"Error: {error}")
+        return "Um erro ocorreu enquanto os dados tentaram ser salvos"
 
     return redirect(url_for('dados_enviados'))
 
