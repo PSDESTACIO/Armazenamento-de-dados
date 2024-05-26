@@ -4,14 +4,14 @@ import psycopg2
 class ClienteRepositoryPostgre:
     def __init__(self):
         # Essa senha (password) muda dependendo da sua senha que você colocou no seu banco de dados de exemplo.
-        self.conn = psycopg2.connect(dbname="banco1",user="postgres", password="root1", host="localhost",port="5432")
+        self.conn = psycopg2.connect(dbname="banco1",user="postgres", password="root", host="localhost",port="5432")
         self.cursor = self.conn.cursor()
         self.conn.autocommit = True
 
     # Tenta salvar os dados na base de dados.
     def save(self, cliente):
         try:
-            self.cursor.execute("insert into cliente (nome,email) values (%s,%s) ",(cliente.nome, cliente.email))
+            self.cursor.execute("INSERT INTO cliente (nome, email) VALUES (%s, %s)",(cliente.nome, cliente.email))
             self.conn.commit()
             return "Dados gravados no PostgreSQL."
         
