@@ -19,10 +19,10 @@ def submit():
     nome = request.form['nome']
     email = request.form['email']
     
-    # Cria nova instancia de Cliente
+    # Create a new Cliente instance
     cliente = Cliente(nome=nome, email=email)
     
-    # Tenta salvar dados para PostgreSQL
+    # Try to save the new cliente to the PostgreSQL database
     try:
         repository = ClienteRepositoryPostgre()
         msg = repository.save(cliente)
