@@ -46,28 +46,41 @@
 
 <body class="content">
 
-    <figure class="centered-figure">
-        <img src="{{ url_for('static', filename='imagem/equipePSD.jpg') }}" style="max-width: 40%; height: auto;"
-            alt="Imagem grande da equipe PSD, responsável pelo desenvolvimento do projeto.">
-    </figure>
-
-    <h2 id="quemsomos"><i>Desenvolvedores de Projeto de Extensâo<br>Equipe PSD (Pessoas Sob Demanda)</i></h2>
-
+    <h1>Armazenar e Assistir Vídeo</h1>
+    <input type="file" id="video-upload" accept="video/*">
+    <div id="error-message"></div>
     <div style="text-align: center;">
-        <i>Somos alunos universitários da Universidade Estácio de Sá.<br>
-            Seguimos neste semestre e projeto com orientação do professor Edson Belém de Souza Junior, docente da Universidade Estácio de Sá,
-            da disciplina Tópicos de Big Data em Python</i>
+        <h2>Seu Vídeo</h2>
+        </br>
+        <video style="width: 80%; max-width: 600; max-height: 400;" id="video-player" controls></video>
     </div>
 
-    <form>
-        <p> Nome:<input id="Nome" value="PSD."></p>
-        <p> Ano:<input id="ano" value=" 2024"></p>
-        <p> Local:<input id="local" value=" Nova Iguaçu"></p>
-        <p> Onde Estuda:<input id="estuda" value=" Universidade Estácio de Sá "></p>
-        <p> Curso:<input id="curso" value=" Sistemas de Informação "></p>
-        <p> Disciplina:<input id="disciplina" value=" Tópico Big Data em Python"></p>
-        <p> Professor:<input id="professor" value=" Edson Belém de S. Junior"></p>
-    </form>
+    <script>
+        const tamanhoMemoria = 50; //A quantidade maxima de megabytes que é permitido para o upload
+
+        document.getElementById('video-upload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const errorMessage = document.getElementById('error-message');
+
+            if (file) {
+                // Limitar o tamanho do arquivo
+                if (file.size > tamanhoMemoria * 1024 * 1024) {
+                    errorMessage.textContent = 'O arquivo é muito grande. O tamanho máximo permitido é 50 MB.';
+                    return;
+                } else {
+                    errorMessage.textContent = '';
+                }
+
+                const videoPlayer = document.getElementById('video-player');
+                const videoContainer = document.getElementById('video-container');
+                const fileURL = URL.createObjectURL(file);
+
+                videoPlayer.src = fileURL;
+                videoContainer.style.display = 'flex';
+            }
+        });
+    </script>
+
 </body>
 
 <footer class="footer">

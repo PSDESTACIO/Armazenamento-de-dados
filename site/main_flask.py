@@ -4,7 +4,7 @@ import os
 # Adicione o diretório pai ao sys.path para resolver importações de módulos
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for # type: ignore
 from model.cliente import Cliente
 from repositorypostgre.cliente_repository_postgre import ClienteRepositoryPostgre
 
@@ -45,6 +45,10 @@ def rota_Contato():
 @app.route('/QuemSomos.html')
 def rota_QuemSomos():
     return render_template('QuemSomos.html')
+
+@app.route('/video.html')
+def rota_video():
+    return render_template('video.html')
 
 @app.route('/postgreteste.html')
 def rota_postgreteste():
