@@ -29,13 +29,8 @@ def submit():
     email = request.form['email']
     senha = request.form['email']
     
-<<<<<<< HEAD
     # Cria uma nova instancia de Cliente
-    cliente = Cliente(nome=nome, email=email)
-=======
-    # Create a new Cliente instance
     cliente = Cliente(nome=nome, email=email, senha=senha)
->>>>>>> site2
     
     # Tenta salvar cliente para PostGre
     try:
