@@ -56,7 +56,7 @@
     </div>
 
     <script>
-        const tamanhoMemoria = 50; //A quantidade maxima de megabytes que é permitido para o upload
+        const tamanhoMemoria = 50 * 1024 * 1024; //A quantidade maxima de megabytes que é permitido para o upload
 
         document.getElementById('video-upload').addEventListener('change', function(event) {
             const file = event.target.files[0];
@@ -64,7 +64,7 @@
 
             if (file) {
                 // Limitar o tamanho do arquivo
-                if (file.size > tamanhoMemoria * 1024 * 1024) {
+                if (file.size > tamanhoMemoria) {
                     errorMessage.textContent = 'O arquivo é muito grande. O tamanho máximo permitido é 50 MB.';
                     return;
                 } else {

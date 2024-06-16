@@ -2,8 +2,8 @@ from model.cliente import Cliente
 from repositorypostgre.cliente_repository_postgre import ClienteRepositoryPostgre
 
 
-cliente1 = Cliente(nome="lu",email="lu@gmail.com")
-cliente2 = Cliente(nome="italo",email="italo@gmail.com")
+cliente1 = Cliente(nome="lu",email="lu@gmail.com",senha="12345678")
+cliente2 = Cliente(nome="italo",email="italo@gmail.com",senha="87654321")
 
 try:
     # Tenta salvar adicionar os clientes definidos acima na base de dados PostgreSQL.
