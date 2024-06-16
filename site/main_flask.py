@@ -83,6 +83,24 @@ def upload_video():
         return redirect(url_for('rota_video'))
     else:
         return redirect(request.url)
+    
+@app.route('/delete_video/<filename>', methods=['POST'])
+def delete_video(filename):
+    try:
+        # Constroi o caminho completo do arquivo a ser deletado
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        
+        # Verifica se o arquivo existe antes de deletar
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            print(f"Arquivo '{filename}' deletado com sucesso.")
+        else:
+            print(f"Arquivo '{filename}' não encontrado para deletar.")
+    except Exception as e:
+        print(f"Erro ao deletar arquivo '{filename}': {str(e)}")
+    
+    # Redireciona de volta para a página dos vídeos
+    return redirect(url_for('rota_video'))
 
 # Abre o aplicativo na porta 5500 e o roda.
 if __name__ == '__main__':

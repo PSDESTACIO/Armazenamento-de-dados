@@ -51,12 +51,17 @@
         <input type="file" id="video-upload" name="video" accept="video/*">
         <button type="submit">Enviar</button>
     </form>
+
     <div style="text-align: center;">
         <h2>Seus Vídeos</h2>
         {% for video in video_files %}
             <video style="width: 80%; max-width: 600px; max-height: 400px;" controls>
                 <source src="{{ url_for('static', filename='uploads/' + video) }}" type="video/mp4">
             </video>
+            <br>
+            <form action="{{ url_for('delete_video', filename=video) }}" method="post">
+                <button type="submit">Excluir</button>
+            </form>
             <br><br>
         {% endfor %}
     </div>
