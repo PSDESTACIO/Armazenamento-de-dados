@@ -26,7 +26,7 @@ class ClienteRepositoryPostgre:
     # Método que printa todos os itens em clientes.
     def findAll(self):
         try:
-            self.cursor.execute("select id, nome, email from cliente")
+            self.cursor.execute("select id, nome, email, senha from cliente")
             rows = self.cursor.fetchall()
 
             for linha in rows:
