@@ -51,39 +51,15 @@
         <input type="file" id="video-upload" name="video" accept="video/*">
         <button type="submit">Enviar</button>
     </form>
-    <div id="error-message">{{ error_message }}</div>
     <div style="text-align: center;">
-        <h2>Seu Vídeo</h2>
-        <video style="width: 80%; max-width: 600px; max-height: 400px;" id="video-player" controls>
-            <source src="{{ url_for('static', filename='uploads/{{ video_filename }}') }}" type="video/mp4">
-        </video>
+        <h2>Seus Vídeos</h2>
+        {% for video in video_files %}
+            <video style="width: 80%; max-width: 600px; max-height: 400px;" controls>
+                <source src="{{ url_for('static', filename='uploads/' + video) }}" type="video/mp4">
+            </video>
+            <br><br>
+        {% endfor %}
     </div>
-
-    <script>
-        const tamanhoMemoria = 50 * 1024 * 1024; //A quantidade maxima de megabytes que é permitido para o upload
-
-        document.getElementById('video-upload').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            const errorMessage = document.getElementById('error-message');
-
-            if (file) {
-                // Limitar o tamanho do arquivo
-                if (file.size > tamanhoMemoria) {
-                    errorMessage.textContent = 'O arquivo é muito grande. O tamanho máximo permitido é 50 MB.';
-                    return;
-                } else {
-                    errorMessage.textContent = '';
-                }
-
-                const videoPlayer = document.getElementById('video-player');
-                const videoContainer = document.getElementById('video-container');
-                const fileURL = URL.createObjectURL(file);
-
-                videoPlayer.src = fileURL;
-                videoContainer.style.display = 'flex';
-            }
-        });
-    </script>
 
 </body>
 
