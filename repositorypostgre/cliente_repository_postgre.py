@@ -1,6 +1,6 @@
 # Instale psycogp2 com 'pip install psycopg2-binary' para usar esse arquivo.
 import psycopg2
-import bcrypt
+from hashlib import sha256
 
 class ClienteRepositoryPostgre:
     def __init__(self):
@@ -12,8 +12,11 @@ class ClienteRepositoryPostgre:
     # Tenta salvar os dados na base de dados.
     def save(self, cliente):
         try:
-            hashed_password = bcrypt.hashpw(cliente.senha.encode('utf-8'), bcrypt.gensalt(10))
-            self.cursor.execute("INSERT INTO cliente (nome, email, senha) VALUES (%s, %s, %s)",(cliente.nome, cliente.email, hashed_password.decode('utf-8')))
+            hashed_password1 = sha256(cliente.senha.encode()).digest()
+            hashed_password2 = sha256('$%.*'.encode()).digest()
+            combined_hash = hashed_password1 + hashed_password2
+
+            self.cursor.execute("INSERT INTO cliente (nome, email, senha) VALUES (%s, %s, %s)",(cliente.nome, cliente.email, combined_hash.hex()))
             self.conn.commit()
             return "Dados gravados no PostgreSQL."
         
