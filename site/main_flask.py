@@ -9,6 +9,12 @@ from model.cliente import Cliente
 from repositorypostgre.cliente_repository_postgre import ClienteRepositoryPostgre
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['MAX_CONTENT_LENGTH'] = 50 * 1048576  # O valor é contado em MB, nesse caso vai ser 50 MB, pq o valor da esquerda é tal
+app.secret_key = 'supersecretkey'
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'mp4'}
 
 @app.route('/')
 def index():
@@ -18,9 +24,10 @@ def index():
 def submit():
     nome = request.form['nome']
     email = request.form['email']
+    senha = request.form['email']
     
     # Create a new Cliente instance
-    cliente = Cliente(nome=nome, email=email)
+    cliente = Cliente(nome=nome, email=email, senha=senha)
     
     # Try to save the new cliente to the PostgreSQL database
     try:

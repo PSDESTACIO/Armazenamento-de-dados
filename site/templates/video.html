@@ -47,12 +47,16 @@
 <body class="content">
 
     <h1>Armazenar e Assistir Vídeo</h1>
-    <input type="file" id="video-upload" accept="video/*">
-    <div id="error-message"></div>
+    <form action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data">
+        <input type="file" id="video-upload" name="video" accept="video/*">
+        <button type="submit">Enviar</button>
+    </form>
+    <div id="error-message">{{ error_message }}</div>
     <div style="text-align: center;">
         <h2>Seu Vídeo</h2>
-        </br>
-        <video style="width: 80%; max-width: 600; max-height: 400;" id="video-player" controls></video>
+        <video style="width: 80%; max-width: 600px; max-height: 400px;" id="video-player" controls>
+            <source src="{{ url_for('static', filename='uploads/{{ video_filename }}') }}" type="video/mp4">
+        </video>
     </div>
 
     <script>
