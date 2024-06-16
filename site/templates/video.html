@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto da Equipe PSD</title>
+    <link rel="icon" href="static/imagem/logoestacio.png">
+
+    <style>
+        h2#quemsomos {
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+        }
+    </style>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    <script src="{{ url_for('static', filename='script/JS.ts') }}"></script>
+
+    <nav>
+
+        <h2> Menu Principal</h2>
+        <ul>
+
+            <li><a href="index.html">Início</a></li>
+            <li><a href="QuemSomos.html">Quem Somos</a></li>
+            <li><a href="Contato.html">Contato</a></li>
+            <li><a href="postgreteste.html">PostgreSQL Demo</a></li>
+            <li><a href="video.html">Video</a></li>
+
+        </ul>
+    </nav>
+
+</head>
+
+<figure class="centered-figure">
+    <img src="{{ url_for('static', filename='imagem/logoestaciofull.png') }}" alt="Imagem" 
+        style="max-width: 20%; height: auto;">
+</figure>
+
+<body class="content">
+
+    <h1>Armazenar e Assistir Vídeo</h1>
+    <form action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data">
+        <input type="file" id="video-upload" name="video" accept="video/*">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <div style="text-align: center;">
+        <h2>Seus Vídeos</h2>
+        {% for video in video_files %}
+            <video style="width: 80%; max-width: 600px; max-height: 400px;" controls>
+                <source src="{{ url_for('static', filename='uploads/' + video) }}" type="video/mp4">
+            </video>
+            <br>
+            <form action="{{ url_for('delete_video', filename=video) }}" method="post">
+                <button type="submit">Excluir</button>
+            </form>
+            <br><br>
+        {% endfor %}
+    </div>
+
+</body>
+
+<footer class="footer">
+    <strong>
+        <p>Site Desenvolvido pela Equipe PSD, na disciplina:<br>
+            <a href="https://estudante.estacio.br/disciplinas/estacio_5652694/temas/1">
+                Tópicos de Big Data em Python </a>
+        </p>
+    </strong>
+
+</footer>
+</html>

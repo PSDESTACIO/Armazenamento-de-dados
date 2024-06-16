@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory # type: ignore
 
 app = Flask(__name__)
 
@@ -34,6 +34,10 @@ def rota_QuemSomos():
 @app.route('/postgreteste.html')
 def rota_postgreteste():
     return render_template('postgreteste.html')
+
+@app.route('/video.html')
+def rota_video():
+    return render_template('video.html')
 
 # Abre o aplicativo na porta 5500 e o roda.
 if __name__ == '__main__':
