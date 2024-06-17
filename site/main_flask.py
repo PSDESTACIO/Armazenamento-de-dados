@@ -1,14 +1,20 @@
+# Imports que ajudam a andar pelos diretorios
 import sys
 import os
-import uuid
 
 # Adicione o diretório pai ao sys.path para resolver importações de módulos
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from flask import Flask, render_template, request, redirect, url_for # type: ignore
 from werkzeug.utils import secure_filename # type: ignore
+
+# Importar codigo que define funcionamento do PostgreSQL.
 from model.cliente import Cliente
 from repositorypostgre.cliente_repository_postgre import ClienteRepositoryPostgre
+
+import uuid
+from moviepy.editor import VideoFileClip
+import psycopg2
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads' # Pasta no qual vai ser direcionado
@@ -18,6 +24,33 @@ app.secret_key = 'supersecretkey' # Responsável pela segurança de formulários
 #Responsável pela extensão do arquivo
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'mp4', 'avi', 'mov', 'mkv'}
+
+def get_video_metadata(file_path):
+    clip = VideoFileClip(file_path)
+    duration = clip.duration
+    width, height = clip.size
+    return duration, width, height,
+
+def save_metadata_to_db(filename, title, description, duration, width, height,):
+    conn = psycopg2.connect(
+        dbname="banco1",
+        user="postgres",
+        password="root",
+        host="localhost",
+        port="5432"
+    )
+    cur = conn.cursor()
+    cur.execute(
+        """
+        INSERT INTO video_metadata (filename, title, description, duration, width, height)
+        VALUES (%s, %s, %s, %s, %s, %s)
+        """,
+        (filename, title, description, duration, width, height)
+    )
+    conn.commit()
+    cur.close()
+    conn.close()
+
 
 @app.route('/')
 def index():
@@ -98,7 +131,7 @@ def upload_video():
     # Verifica se o vídeo e o título foram enviados no formulário
     if 'video' not in request.files or 'video_title' not in request.form:
         return redirect('/video.html')
-    
+
     file = request.files['video']
     title = request.form['video_title']
     description = request.form['video_description']
@@ -109,18 +142,22 @@ def upload_video():
     
     # Se o arquivo for permitido, processa o upload
     if file and allowed_file(file.filename):
-        filename = secure_filename(f"{uuid.uuid4()}_{file.filename}") # Gera um nome de arquivo seguro e único
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # Salva o arquivo de vídeo no diretório de uploads
-        title_filename = filename.rsplit('.', 1)[0] + '.txt' # Gera o nome do arquivo do título correspondente ao vídeo
-        description_filename = filename.rsplit('.', 1)[0] + '.desc.txt' # Gera o nome do arquivo da descrição correspondente ao vídeo
+        filename = secure_filename(f"{uuid.uuid4()}_{file.filename}")
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
 
-        # Salva o título do vídeo em um arquivo de texto
-        with open(os.path.join(app.config['UPLOAD_FOLDER'], title_filename), 'w') as f: 
+        title_filename = filename.rsplit('.', 1)[0] + '.txt'
+        description_filename = filename.rsplit('.', 1)[0] + '.desc.txt'
+        
+        with open(os.path.join(app.config['UPLOAD_FOLDER'], title_filename), 'w') as f:
             f.write(title)
 
         # Salva a descrição do vídeo em um arquivo de texto
         with open(os.path.join(app.config['UPLOAD_FOLDER'], description_filename), 'w') as f:
             f.write(description)
+
+        duration, width, height, = get_video_metadata(file_path)
+        save_metadata_to_db(filename, title, description, duration, width, height)
 
         return redirect(url_for('rota_video'))
     else:
