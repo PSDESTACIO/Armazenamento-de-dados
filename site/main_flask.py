@@ -1,6 +1,9 @@
 # Imports que ajudam a andar pelos diretorios
 import sys
 import os
+import uuid
+from moviepy.editor import VideoFileClip # type: ignore
+import psycopg2 # type: ignore
 
 # Adicione o diretório pai ao sys.path para resolver importações de módulos
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -12,11 +15,7 @@ from werkzeug.utils import secure_filename # type: ignore
 from model.cliente import Cliente
 from repositorypostgre.cliente_repository_postgre import ClienteRepositoryPostgre
 
-import uuid
-from moviepy.editor import VideoFileClip
-import psycopg2
-
-app = Flask(__name__)
+app = Flask(__name__) # Serve para inicializar
 app.config['UPLOAD_FOLDER'] = 'static/uploads' # Pasta no qual vai ser direcionado
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1048576  # O valor é contado em MB, nesse caso vai ser 50 MB, pq o valor da esquerda é tal
 app.secret_key = 'supersecretkey' # Responsável pela segurança de formulários e afins
@@ -57,7 +56,7 @@ def delete_metadata_from_db(filename):
         user="postgres",
         password="root",
         host="localhost",
-        port="5432"
+        port="5432" # 5432 é o certo, a 5500 é para testar
     )
     cur = conn.cursor()
     cur.execute(
@@ -117,7 +116,7 @@ def rota_video():
     videos = []  # Cria uma lista para armazenar os vídeos e seus títulos
     for video_file in video_files:
         
-        title_file = video_file.rsplit('.', 1)[0] + '.txt' # Gera o nome do arquivo de título correspondente ao vídeo
+        title_file = video_file.rsplit('.', 1)[0] + '.title.txt' # Gera o nome do arquivo de título correspondente ao vídeo
         description_file = video_file.rsplit('.', 1)[0] + '.desc.txt' # Gera o nome do arquivo de descrição correspondente ao vídeo
 
         # Constrói o caminho completo do arquivo de título
@@ -165,8 +164,8 @@ def upload_video():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(file_path)
 
-        title_filename = filename.rsplit('.', 1)[0] + '.txt'
-        description_filename = filename.rsplit('.', 1)[0] + '.desc.txt'
+        title_filename = filename.rsplit('.', 1)[0] + '.title.txt' # Gera o nome do arquivo do título correspondente ao vídeo
+        description_filename = filename.rsplit('.', 1)[0] + '.desc.txt' # Gera o nome do arquivo da descrição correspondente ao vídeo
         
         with open(os.path.join(app.config['UPLOAD_FOLDER'], title_filename), 'w') as f:
             f.write(title)
@@ -195,15 +194,16 @@ def delete_video(filename):
         # Se o arquivo de vídeo existir, deleta o arquivo de vídeo, título e descrição
         if os.path.exists(file_path):
             os.remove(file_path)
-            delete_metadata_from_db(filename)
 
             if os.path.exists(title_file_path):
                 os.remove(title_file_path)
 
             if os.path.exists(description_file_path):
                 os.remove(description_file_path)
+
             print(f"Arquivo '{filename}' deletado com sucesso.")
 
+            delete_metadata_from_db(filename)
         else:
             print(f"Arquivo '{filename}' não encontrado para deletar.")
     except Exception as e:

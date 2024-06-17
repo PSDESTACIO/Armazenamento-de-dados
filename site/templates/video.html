@@ -46,31 +46,9 @@
 
 <body class="content">
 
-    <!--<h1>Armazenar e Assistir Vídeo</h1>
-    <form action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data">
-        <input type="text" name="video_title" placeholder="Título do Vídeo" required>
-        <input type="file" id="video-upload" name="video" accept="video/*" required>
-        <button type="submit">Enviar</button>
-    </form>
-
-    <div style="text-align: center;">
-        <h2>Seus Vídeos</h2>
-        {% for video in videos %}
-            <h3 style="color: rgb(211, 32, 32);">{{ video.title }}</h3>
-            <video style="width: 80%; max-width: 600px; max-height: 400px; box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);" controls>
-                <source src="{{ url_for('static', filename='uploads/' + video.filename) }}" type="video/mp4">
-            </video>
-            <br>
-            <form action="{{ url_for('delete_video', filename=video.filename) }}" method="post">
-                <button type="submit">Excluir</button>
-            </form>
-            <br><br>
-        {% endfor %}
-    </div>-->
-
     <h1>Armazenar e Assistir Vídeo</h1>
     <form action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data">
-        <input type="text" name="video_title" placeholder="Título do Vídeo" required>
+        <input type="text" name="video_title" placeholder="Título do Vídeo" maxlength="50" required>
         <input type="file" id="video-upload" name="video" accept="video/*" required>
         <button type="submit">Enviar</button>
         <br><br>
