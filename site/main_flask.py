@@ -51,6 +51,25 @@ def save_metadata_to_db(filename, title, description, duration, width, height,):
     cur.close()
     conn.close()
 
+def delete_metadata_from_db(filename):
+    conn = psycopg2.connect(
+        dbname="banco1",
+        user="postgres",
+        password="root",
+        host="localhost",
+        port="5432"
+    )
+    cur = conn.cursor()
+    cur.execute(
+            """
+            DELETE FROM video_metadata WHERE filename = %s
+            """,
+            (filename,)
+    )
+    conn.commit()
+    cur.close()
+    conn.close()
+
 
 @app.route('/')
 def index():
@@ -156,7 +175,7 @@ def upload_video():
         with open(os.path.join(app.config['UPLOAD_FOLDER'], description_filename), 'w') as f:
             f.write(description)
 
-        duration, width, height, = get_video_metadata(file_path)
+        duration, width, height = get_video_metadata(file_path)
         save_metadata_to_db(filename, title, description, duration, width, height)
 
         return redirect(url_for('rota_video'))
@@ -176,11 +195,15 @@ def delete_video(filename):
         # Se o arquivo de vídeo existir, deleta o arquivo de vídeo, título e descrição
         if os.path.exists(file_path):
             os.remove(file_path)
+            delete_metadata_from_db(filename)
+
             if os.path.exists(title_file_path):
                 os.remove(title_file_path)
+
             if os.path.exists(description_file_path):
                 os.remove(description_file_path)
             print(f"Arquivo '{filename}' deletado com sucesso.")
+
         else:
             print(f"Arquivo '{filename}' não encontrado para deletar.")
     except Exception as e:
