@@ -46,23 +46,53 @@
 
 <body class="content">
 
-    <h1>Armazenar e Assistir Vídeo</h1>
+    <!--<h1>Armazenar e Assistir Vídeo</h1>
     <form action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data">
-        <input type="file" id="video-upload" name="video" accept="video/*">
+        <input type="text" name="video_title" placeholder="Título do Vídeo" required>
+        <input type="file" id="video-upload" name="video" accept="video/*" required>
         <button type="submit">Enviar</button>
     </form>
 
     <div style="text-align: center;">
         <h2>Seus Vídeos</h2>
-        {% for video in video_files %}
-            <video style="width: 80%; max-width: 600px; max-height: 400px;" controls>
-                <source src="{{ url_for('static', filename='uploads/' + video) }}" type="video/mp4">
+        {% for video in videos %}
+            <h3 style="color: rgb(211, 32, 32);">{{ video.title }}</h3>
+            <video style="width: 80%; max-width: 600px; max-height: 400px; box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);" controls>
+                <source src="{{ url_for('static', filename='uploads/' + video.filename) }}" type="video/mp4">
             </video>
             <br>
-            <form action="{{ url_for('delete_video', filename=video) }}" method="post">
+            <form action="{{ url_for('delete_video', filename=video.filename) }}" method="post">
                 <button type="submit">Excluir</button>
             </form>
             <br><br>
+        {% endfor %}
+    </div>-->
+
+    <h1>Armazenar e Assistir Vídeo</h1>
+    <form action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data">
+        <input type="text" name="video_title" placeholder="Título do Vídeo" required>
+        <input type="file" id="video-upload" name="video" accept="video/*" required>
+        <button type="submit">Enviar</button>
+        <br><br>
+        <textarea style="width: 512px; height: 64px;resize: none;" name="video_description" placeholder="Descrição do Vídeo (Máximo de 250 caracteres)" maxlength="250" required></textarea>
+    </form>
+
+    <div style="text-align: center;">
+        <h2>Seus Vídeos</h2>
+        {% for video in videos %}
+            <div style="background-color: rgb(221, 244, 248); padding: 20px; width: 50%; margin: 0 auto;">
+                <h3 style="color: rgb(211, 32, 32);">{{ video.title }}</h3>
+                <video style="width: 80%; max-width: 600px; max-height: 400px; box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);" controls>
+                    <source src="{{ url_for('static', filename='uploads/' + video.filename) }}" type="video/mp4">
+                </video>
+                <p style="color: rgb(51, 51, 51);">{{ video.description }}</p>
+                <br>
+                <form action="{{ url_for('delete_video', filename=video.filename) }}" method="post">
+                    <button type="submit">Excluir</button>
+                </form>
+                <br>
+            </div>
+            <br>
         {% endfor %}
     </div>
 

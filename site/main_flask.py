@@ -58,12 +58,36 @@ def rota_QuemSomos():
 
 @app.route('/video.html')
 def rota_video():
-    # Lista todos os arquivos de vídeo no diretório de uploads
-    video_files = os.listdir(app.config['UPLOAD_FOLDER'])
-    video_files = [f for f in video_files if allowed_file(f)]
-    # Ordena os arquivos por data de criação
-    video_files.sort(key=lambda x: os.path.getctime(os.path.join(app.config['UPLOAD_FOLDER'], x)), reverse=True)
-    return render_template('video.html', video_files=video_files)
+    video_files = os.listdir(app.config['UPLOAD_FOLDER']) # Lista todos os arquivos no diretório de uploads
+    video_files = [f for f in video_files if allowed_file(f)] # Filtra apenas os arquivos de vídeo permitidos
+    video_files.sort(key=lambda x: os.path.getctime(os.path.join(app.config['UPLOAD_FOLDER'], x)), reverse=True) # Ordena os arquivos por data de criação, do mais recente ao mais antigo
+    
+    videos = []  # Cria uma lista para armazenar os vídeos e seus títulos
+    for video_file in video_files:
+        
+        title_file = video_file.rsplit('.', 1)[0] + '.txt' # Gera o nome do arquivo de título correspondente ao vídeo
+        description_file = video_file.rsplit('.', 1)[0] + '.desc.txt' # Gera o nome do arquivo de descrição correspondente ao vídeo
+
+        # Constrói o caminho completo do arquivo de título
+        title_path = os.path.join(app.config['UPLOAD_FOLDER'], title_file) 
+        description_path = os.path.join(app.config['UPLOAD_FOLDER'], description_file)
+
+        title = "Sem Título" # Define o título padrão como "Sem Título"
+        description = "Sem Descrição" # Define a descrição padrão como "Sem Título"
+
+        # Se o arquivo de título existir, lê o título do arquivo
+        if os.path.exists(title_path):
+            with open(title_path, 'r') as f:
+                title = f.read().strip()
+
+        # Se o arquivo de descrição existir, lê a descrição do arquivo
+        if os.path.exists(description_path):
+            with open(description_path, 'r') as f:
+                description = f.read().strip()
+                
+        videos.append({'filename': video_file, 'title': title, 'description': description})# Adiciona o vídeo e seu título à lista
+    
+    return render_template('video.html', videos=videos)
 
 @app.route('/postgreteste.html')
 def rota_postgreteste():
@@ -71,15 +95,33 @@ def rota_postgreteste():
 
 @app.route('/upload_video', methods=['POST'])
 def upload_video():
-    if 'video' not in request.files:
+    # Verifica se o vídeo e o título foram enviados no formulário
+    if 'video' not in request.files or 'video_title' not in request.form:
         return redirect('/video.html')
+    
     file = request.files['video']
+    title = request.form['video_title']
+    description = request.form['video_description']
+
+    # Se o nome do arquivo estiver vazio, redireciona de volta para a página de vídeos
     if file.filename == '':
         return redirect('/video.html')
+    
+    # Se o arquivo for permitido, processa o upload
     if file and allowed_file(file.filename):
-        # Gera um nome de arquivo único
-        filename = secure_filename(f"{uuid.uuid4()}_{uuid.uuid4().hex}_{file.filename}")
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        filename = secure_filename(f"{uuid.uuid4()}_{file.filename}") # Gera um nome de arquivo seguro e único
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # Salva o arquivo de vídeo no diretório de uploads
+        title_filename = filename.rsplit('.', 1)[0] + '.txt' # Gera o nome do arquivo do título correspondente ao vídeo
+        description_filename = filename.rsplit('.', 1)[0] + '.desc.txt' # Gera o nome do arquivo da descrição correspondente ao vídeo
+
+        # Salva o título do vídeo em um arquivo de texto
+        with open(os.path.join(app.config['UPLOAD_FOLDER'], title_filename), 'w') as f: 
+            f.write(title)
+
+        # Salva a descrição do vídeo em um arquivo de texto
+        with open(os.path.join(app.config['UPLOAD_FOLDER'], description_filename), 'w') as f:
+            f.write(description)
+
         return redirect(url_for('rota_video'))
     else:
         return redirect(request.url)
@@ -87,19 +129,26 @@ def upload_video():
 @app.route('/delete_video/<filename>', methods=['POST'])
 def delete_video(filename):
     try:
-        # Constroi o caminho completo do arquivo a ser deletado
+        # Constrói o caminho completo do arquivo de vídeo a ser deletado
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+        # Gera os caminhos dos arquivos de título e descrição correspondentes ao vídeo
+        title_file_path = file_path.rsplit('.', 1)[0] + '.title.txt'
+        description_file_path = file_path.rsplit('.', 1)[0] + '.desc.txt'
         
-        # Verifica se o arquivo existe antes de deletar
+        # Se o arquivo de vídeo existir, deleta o arquivo de vídeo, título e descrição
         if os.path.exists(file_path):
             os.remove(file_path)
+            if os.path.exists(title_file_path):
+                os.remove(title_file_path)
+            if os.path.exists(description_file_path):
+                os.remove(description_file_path)
             print(f"Arquivo '{filename}' deletado com sucesso.")
         else:
             print(f"Arquivo '{filename}' não encontrado para deletar.")
     except Exception as e:
         print(f"Erro ao deletar arquivo '{filename}': {str(e)}")
     
-    # Redireciona de volta para a página dos vídeos
     return redirect(url_for('rota_video'))
 
 # Abre o aplicativo na porta 5500 e o roda.

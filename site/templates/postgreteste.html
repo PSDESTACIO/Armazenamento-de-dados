@@ -39,14 +39,14 @@
 
 <body>
     <h1>Teste de PostgreSQL</h1>
-    <h4>Insira nome e email. Estes dados serão adicionados ao banco de dados PostgreSQL.</h4>
+    <h4>Insira o nome, o email e a senha. Estes dados serão adicionados ao banco de dados PostgreSQL.</h4>
     <form action="/submit" method="POST">
         <label for="name">Nome:</label><br>
-        <input type="text" id="name" name="nome"><br><br>
+        <input type="text" id="name" name="nome" required><br><br>
         <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email"><br><br>
+        <input type="email" id="email" name="email" required><br><br>
         <label for="senha">Senha:</label><br>
-        <input type="password" id="senha" name="senha" minlength="8"><br><br>
+        <input type="password" id="senha" name="senha" minlength="8" required><br><br>
         <input type="submit" value="Submit">
     </form>
 </body>
