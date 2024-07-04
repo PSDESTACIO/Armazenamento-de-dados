@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Projeto da Equipe PSD</title>
-    <link rel="icon" href="static/imagem/logoestacio.png">
+    <title>Plataforma De Vídeo</title>
+    <!--<link rel="icon" href="static/imagem/logoestacio.png">-->
 
     <style>
         h1#subtitulo {
@@ -20,39 +20,34 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
     <script src="{{ url_for('static', filename='script/JS.ts') }}"></script>
 
-    <nav>
+    <!--<nav>
         <h2>Menu Principal</h2>
         <ul>
 
-            <li><a href="index.html">Início</a></li>
-            <li><a href="QuemSomos.html">Quem Somos</a></li>
-            <li><a href="Contato.html">Contato</a></li>
-            <li><a href="postgreteste.html">PostgreSQL Demo</a></li>
+            <li><a href="login.html">Início</a></li>
             <li><a href="video.html">Video</a></li>
 
         </ul>
-    </nav>
+    </nav>-->
 </head>
 
 <body>
 
-    <figure class="centered-figure">
+    <!--<figure class="centered-figure">
         <img src="{{ url_for('static', filename='imagem/logoestaciofull.png') }}" alt="Imagem" style="max-width: 20%; height: auto;">
-    </figure>
+    </figure>-->
 
     <div style="text-align: center;">
         <p>
-        <h2><b><i>Tópicos de Big Data em Python</i></b></h2>
+        <h2><b>Plataforma de Vídeos</b></h2>
         </p>
 
-        <b> 
-            Este site está sendo desenvolvido como parte um projeto extensionista da disciplina,
-            Tópicos de Big Data Python, ministrada pelo professor Edson Belém Souza Junior, na
-            Universidade Estácio Sá. <br>
-            Utilizando as tecnologias que aprendemos
-            em outras disciplinas que são IDE PHP Storm, Visual Studio Code, Hack MD,
-            PostgreSQL e outros, que estão disponiveis no Citrix.
-        </b>
+        <form action="{{ url_for('rota_video') }}" method="post">
+            <label for="nome_usuario">Usuário</label>
+            <input type="text" id="nome_usuario" required>
+            <br/> <br/>
+            <button type="submit">Entrar</button>
+        </form>
     </div>
 
 </body><br>

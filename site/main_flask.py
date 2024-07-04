@@ -72,7 +72,7 @@ def delete_metadata_from_db(filename):
 
 @app.route('/')
 def index():
-    return render_template('postgreteste.html')
+    return render_template('login.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -95,19 +95,11 @@ def submit():
     return redirect(url_for('dados_enviados'))
 
 # Redireciona usuario para pagina principal apos inserir dados
-@app.route('/index.html')
+@app.route('/login.html')
 def dados_enviados():
-    return render_template('index.html')
+    return render_template('login.html')
 
-@app.route('/Contato.html')
-def rota_Contato():
-    return render_template('Contato.html')
-
-@app.route('/QuemSomos.html')
-def rota_QuemSomos():
-    return render_template('QuemSomos.html')
-
-@app.route('/video.html')
+@app.route('/video.html',  methods=['POST'])
 def rota_video():
     video_files = os.listdir(app.config['UPLOAD_FOLDER']) # Lista todos os arquivos no diretório de uploads
     video_files = [f for f in video_files if allowed_file(f)] # Filtra apenas os arquivos de vídeo permitidos
@@ -139,10 +131,6 @@ def rota_video():
         videos.append({'filename': video_file, 'title': title, 'description': description})# Adiciona o vídeo e seu título à lista
     
     return render_template('video.html', videos=videos)
-
-@app.route('/postgreteste.html')
-def rota_postgreteste():
-    return render_template('postgreteste.html')
 
 @app.route('/upload_video', methods=['POST'])
 def upload_video():
